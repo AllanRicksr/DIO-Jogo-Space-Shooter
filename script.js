@@ -20,7 +20,7 @@ function flyShip(event) {
 function moveUp() {
     let topPosition = getComputedStyle(yourShip).getPropertyValue('top');
     if (topPosition === "0px") {
-        return;
+        return
     } else {
         let position = parseInt(topPosition);
         position -= 50;
@@ -29,3 +29,15 @@ function moveUp() {
 }
 
 //função de descer
+function moveDown() {
+    let topPosition = getComputedStyle(yourShip).getPropertyValue('top');
+    if (topPosition === "510px") {
+        return
+    } else {
+        let position = parseInt(topPosition);
+        position += 50;
+        yourShip.style.top = `${position}px`;
+    }
+}
+
+window.addEventListener('keydown', flyShip);
