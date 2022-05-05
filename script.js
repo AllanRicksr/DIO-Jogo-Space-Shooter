@@ -53,13 +53,13 @@ function fireLaser() {
 }
 
 function createLaserElement() {
-    let xPositoin = parseInt(window.getComputedStyle(yourShip).getPropertyValue('left'));
-    let yPositoin = parseInt(window.getComputedStyle(yourShip).getPropertyValue('top'));
+    let xPosition = parseInt(window.getComputedStyle(yourShip).getPropertyValue('left'));
+    let yPosition = parseInt(window.getComputedStyle(yourShip).getPropertyValue('top'));
     let newLaser = document.createElement('img');
     newLaser.src = 'img/shoot.png';
     newLaser.classList.add('laser');
-    newLaser.style.left = `${xPositoin}px`;
-    newLaser.style.top = `${yPositoin - 10}px`;
+    newLaser.style.left = `${xPosition}px`;
+    newLaser.style.top = `${yPosition - 10}px`;
     return newLaser;
 }
 
@@ -122,7 +122,7 @@ function checkLaserCollision(laser, alien) {
 
     let alienTop = parseInt(alien.style.top);
     let alienLeft = parseInt(alien.style.left);
-    let alienBottom = laserTop - 30;
+    let alienBottom = alienTop - 30;
 
     if (laserLeft != 340 && laserLeft + 40 >= alienLeft) {
         if (laserTop <= alienTop && laserTop >= alienBottom) {
@@ -130,6 +130,8 @@ function checkLaserCollision(laser, alien) {
         } else {
             return false;
         }
+    } else {
+        return false;
     }
 }
 
@@ -149,16 +151,16 @@ function playGame() {
 }
 
 //função de game over
-function gamaOver() {
-    Window.removeEventListener('keydown', flyShip);
+function gameOver() {
+    window.removeEventListener('keydown', flyShip);
     clearInterval(alienInterval);
-    let alien = document.querySelectorAll('.alien');
-    alien.forEach((laser) => laser.remove());
+    let aliens = document.querySelectorAll('.alien');
+    aliens.forEach((alien) => alien.remove());
     let lasers = document.querySelectorAll('.laser');
     lasers.forEach((laser) => laser.remove());
     setTimeout(() => {
         alert("game over!");
-        yourShip.style.display = "block";
+        yourShip.style.top = "250px";
         startButton.style.display = "block";
         instructionsText.style.display = "block";
     });
